@@ -12,7 +12,7 @@ import javafx.event.*;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class HelloApplication extends Application implements EventHandler<ActionEvent>{
+public class HelloApplication extends Application {
     Button WelcomeButton = new Button("Welcome!");
     Button AfterInputIsTaken = new Button("next!");
     Button AfterMethodIsChosen = new Button("next!");
@@ -27,7 +27,11 @@ public class HelloApplication extends Application implements EventHandler<Action
     @Override
     public void start(Stage stage) throws IOException  {
         WelcomeButton.setText("Hello!");
-        WelcomeButton.setOnAction(this);
+        WelcomeButton.setOnAction(e ->
+        {
+            inputTaker();
+
+        });
         StackPane layout = new StackPane();
         layout.getChildren().add(WelcomeButton);
         Scene scene = new Scene(layout, 300, 300);
@@ -37,8 +41,9 @@ public class HelloApplication extends Application implements EventHandler<Action
     void inputTaker()
     {
         StackPane layout = new StackPane();
-        AfterInputIsTaken.setOnAction(this);
-
+        AfterInputIsTaken.setOnAction(e -> {
+            methodPicker();
+        });
         Node y = new Label("Please insert the equations!");
         layout.getChildren().add(0,y);
         layout.getChildren().add(AfterInputIsTaken);
@@ -52,7 +57,9 @@ public class HelloApplication extends Application implements EventHandler<Action
     {
         StackPane layout = new StackPane();
         Node y = new Label("Please insert the method!");
-        AfterMethodIsChosen.setOnAction(this);
+        AfterMethodIsChosen.setOnAction(e -> {
+            needParameterOrNot();
+        });
         layout.getChildren().add(0,y);
         layout.getChildren().add(1,AfterMethodIsChosen);
         Scene scene1 = new Scene(layout, 300, 300);
@@ -66,15 +73,42 @@ public class HelloApplication extends Application implements EventHandler<Action
         if(type == 1) {
             extraSceneForParameters();
         }
+        else
+            needInitialGuessOrNot();
     }
 
     void extraSceneForParameters()
     {
         StackPane layout = new StackPane();
         Node y = new Label("Please insert parameters");
-        AfterParametersAreSet.setOnAction(this);
+        AfterParametersAreSet.setOnAction(e->
+        {
+            needInitialGuessOrNot();
+        });
         layout.getChildren().add(0,y);
         layout.getChildren().add(1,AfterParametersAreSet);
+        Scene scene1 = new Scene(layout, 300, 300);
+        st.setScene(scene1);
+        st.show();
+    }
+
+    void needInitialGuessOrNot()
+    {
+        int type = 0;
+        if(type == 1)
+            extraSceneForInitialGuess();
+        else
+            precisionSetter();
+    }
+    void extraSceneForInitialGuess()
+    {
+        StackPane layout = new StackPane();
+        Node y = new Label("Please insert initial Guess");
+        AfterIntialGuessIsSet.setOnAction(e->{
+            precisionSetter();
+        });
+        layout.getChildren().add(0,y);
+        layout.getChildren().add(1,AfterIntialGuessIsSet);
         Scene scene1 = new Scene(layout, 300, 300);
         st.setScene(scene1);
         st.show();
@@ -83,26 +117,11 @@ public class HelloApplication extends Application implements EventHandler<Action
     {
         StackPane layout = new StackPane();
         Node y = new Label("Please insert precision");
-        AfterPrecisionIsSet.setOnAction(this);
+        AfterPrecisionIsSet.setOnAction(e -> {
+            solve();
+        });
         layout.getChildren().add(0,y);
         layout.getChildren().add(1,AfterPrecisionIsSet);
-        Scene scene1 = new Scene(layout, 300, 300);
-        st.setScene(scene1);
-        st.show();
-    }
-    void needInitialGuessOrNot()
-    {
-        int type = 0;
-        if(type == 1)
-            extraSceneForInitialGuess();
-    }
-    void extraSceneForInitialGuess()
-    {
-        StackPane layout = new StackPane();
-        Node y = new Label("Please insert initial Guess");
-        AfterIntialGuessIsSet.setOnAction(this);
-        layout.getChildren().add(0,y);
-        layout.getChildren().add(1,AfterIntialGuessIsSet);
         Scene scene1 = new Scene(layout, 300, 300);
         st.setScene(scene1);
         st.show();
@@ -112,27 +131,6 @@ public class HelloApplication extends Application implements EventHandler<Action
         // We'll make object and pass the every thing to it
         // 5 methods will be representing the 5 ways to
         // solve a system of linear Equations
-    }
-    @Override
-    public void handle(ActionEvent actionEvent) {
-        if(actionEvent.getSource()==WelcomeButton)
-        {
-            inputTaker();
-        }
-        else if(actionEvent.getSource()==AfterInputIsTaken)
-        {
-            methodPicker();
-        }
-        else if(actionEvent.getSource()==AfterMethodIsChosen)
-        {
-            needParameterOrNot();
-            precisionSetter();
-        }
-        else if(actionEvent.getSource()==AfterParametersAreSet)
-        {
-            needInitialGuessOrNot();
-            solve();
-        }
     }
 
 
