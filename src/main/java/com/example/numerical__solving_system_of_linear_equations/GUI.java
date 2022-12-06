@@ -5,6 +5,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class GUI {
@@ -26,7 +27,7 @@ public class GUI {
     void inputTaker()
     {
         Button AfterInputIsTaken = new Button("next!");
-        StackPane layout = new StackPane();
+        VBox layout = new VBox();
         AfterInputIsTaken.setOnAction(e -> {
             methodPicker();
         });
@@ -41,7 +42,7 @@ public class GUI {
     void methodPicker()
     {
         Button AfterMethodIsChosen = new Button("next!");
-        StackPane layout = new StackPane();
+        VBox layout = new VBox();
         Node y = new Label("Please insert the method!");
         AfterMethodIsChosen.setOnAction(e -> {
             needParameterOrNot();
@@ -65,7 +66,7 @@ public class GUI {
     {
         Button AfterParametersAreSet = new Button("next!");
 
-        StackPane layout = new StackPane();
+        VBox layout = new VBox();
         Node y = new Label("Please insert parameters");
         AfterParametersAreSet.setOnAction(e->
         {
@@ -88,7 +89,7 @@ public class GUI {
     void extraSceneForInitialGuess()
     {
         Button AfterIntialGuessIsSet = new Button("next!");
-        StackPane layout = new StackPane();
+        VBox layout = new VBox();
         Node y = new Label("Please insert initial Guess");
         AfterIntialGuessIsSet.setOnAction(e->{
             precisionSetter();
@@ -102,7 +103,7 @@ public class GUI {
     void precisionSetter()
     {
         Button Solve = new Button("solve");
-        StackPane layout = new StackPane();
+        VBox layout = new VBox();
         Node y = new Label("Please insert precision");
         Solve.setOnAction(e -> {
             solve();
