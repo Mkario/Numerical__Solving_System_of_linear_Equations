@@ -1,5 +1,5 @@
 # Numerical__Solving_System_of_linear_Equations
-Implementing main methods Of Solving systems of linear equations Which are:
+Implementation of main methods Of Solving systems of linear equations Which are:
 1) Gauss
 2) Gauss-Jordan
 3) LU decompostion
